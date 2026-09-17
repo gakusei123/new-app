@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>二択の質問</title>
+  <title>まーちゃんへの手紙</title>
   <style>
     * {
       box-sizing: border-box;
@@ -15,30 +15,52 @@
       display: grid;
       place-items: center;
       font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", sans-serif;
-      color: #26211d;
+      color: #352722;
       background:
-        linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.78)),
-        url("https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=1600&q=80") center / cover;
+        linear-gradient(135deg, rgba(255, 246, 238, 0.92), rgba(250, 226, 221, 0.78)),
+        url("https://images.unsplash.com/photo-1516417156595-3ca5df62a3a4?auto=format&fit=crop&w=1600&q=80") center / cover;
+      overflow: hidden;
     }
 
     main {
       position: relative;
       width: min(92vw, 520px);
-      min-height: 255px;
-      padding: 36px 28px;
-      border: 1px solid rgba(97, 78, 60, 0.2);
+      min-height: 360px;
+      padding: 34px 30px 30px;
+      border: 1px solid rgba(164, 93, 83, 0.24);
       border-radius: 8px;
-      background: rgba(255, 252, 247, 0.92);
-      box-shadow: 0 20px 55px rgba(54, 40, 29, 0.18);
+      background:
+        linear-gradient(transparent 95%, rgba(205, 127, 116, 0.16) 96%),
+        rgba(255, 253, 248, 0.95);
+      background-size: 100% 34px, auto;
+      box-shadow: 0 22px 58px rgba(94, 49, 43, 0.2);
       text-align: center;
+    }
+
+    main::before {
+      content: "";
+      position: absolute;
+      inset: 12px auto auto 16px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(190, 75, 82, 0.12);
+      box-shadow: 22px 12px 0 rgba(190, 75, 82, 0.08);
     }
 
     h1 {
       margin: 0 0 28px;
-      font-size: clamp(1.7rem, 4vw, 2.5rem);
+      font-size: clamp(1.15rem, 3.4vw, 1.5rem);
       font-weight: 700;
       line-height: 1.45;
       letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 560px) {
+      h1 {
+        font-size: clamp(1rem, 5vw, 1.35rem);
+      }
     }
 
     .choices {
@@ -47,6 +69,154 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 14px;
       min-height: 150px;
+    }
+
+    .question-number {
+      margin: 0 0 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #a45d53;
+    }
+
+    .top-page {
+      width: 100%;
+      margin: 0;
+    }
+
+    .letter-scene {
+      position: relative;
+      width: 154px;
+      height: 106px;
+      margin: 0 auto 22px;
+    }
+
+    .envelope {
+      position: absolute;
+      inset: 28px 0 0;
+      border-radius: 6px;
+      background: #eab5a2;
+      box-shadow: 0 12px 28px rgba(94, 49, 43, 0.16);
+      overflow: hidden;
+    }
+
+    .envelope::before,
+    .envelope::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 0;
+      height: 0;
+      border-top: 40px solid transparent;
+      border-bottom: 40px solid transparent;
+    }
+
+    .envelope::before {
+      left: 0;
+      border-left: 78px solid #f0c3b3;
+    }
+
+    .envelope::after {
+      right: 0;
+      border-right: 78px solid #f0c3b3;
+    }
+
+    .paper {
+      position: absolute;
+      left: 24px;
+      top: 0;
+      width: 106px;
+      height: 76px;
+      border-radius: 5px;
+      background: #fffdf8;
+      border: 1px solid rgba(164, 93, 83, 0.22);
+      box-shadow: 0 8px 18px rgba(94, 49, 43, 0.12);
+    }
+
+    .paper::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      top: 20px;
+      width: 70px;
+      height: 8px;
+      border-top: 2px solid #cf887c;
+      border-bottom: 2px solid #cf887c;
+    }
+
+    .heart {
+      position: absolute;
+      right: 30px;
+      top: 46px;
+      width: 20px;
+      height: 20px;
+      transform: rotate(45deg);
+      background: #c94958;
+      z-index: 1;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #c94958;
+    }
+
+    .heart::before {
+      left: -10px;
+    }
+
+    .heart::after {
+      top: -10px;
+    }
+
+    .final-message {
+      display: none;
+      margin-top: 12px;
+    }
+
+    .final-message strong {
+      display: block;
+      margin-bottom: 14px;
+      color: #a43f4d;
+      font-size: clamp(1.45rem, 5vw, 2.1rem);
+      line-height: 1.35;
+    }
+
+    .final-message span {
+      color: #5f473e;
+      font-size: clamp(1.1rem, 4vw, 1.55rem);
+      font-weight: 700;
+    }
+
+    main.is-final .question-number,
+    main.is-final h1,
+    main.is-final .choices,
+    main.is-final #answer {
+      display: none;
+    }
+
+    main.is-final .final-message {
+      display: block;
+    }
+
+    main:not(.is-top) .top-page {
+      display: none;
+    }
+
+    main.is-top .question-number,
+    main.is-top > h1,
+    main.is-top .choices,
+    main.is-top #answer,
+    main.is-top .final-message {
+      display: none;
+    }
+
+    main.is-top {
+      display: grid;
+      place-items: center;
     }
 
     button {
@@ -72,7 +242,13 @@
 
     .yes {
       color: #fff;
-      background: #2f7d68;
+      background: #b94d5b;
+    }
+
+    .start-button {
+      width: min(100%, 260px);
+      color: #fff;
+      background: #b94d5b;
     }
 
     .no {
@@ -81,7 +257,7 @@
       right: 0;
       width: calc(50% - 7px);
       color: #3b3028;
-      background: #ead8c4;
+      background: #f2d5c8;
     }
 
     #answer {
@@ -89,6 +265,7 @@
       margin: 22px 0 0;
       font-size: 1rem;
       font-weight: 700;
+      color: #a43f4d;
     }
 
     @media (max-width: 420px) {
@@ -111,29 +288,79 @@
   </style>
 </head>
 <body>
-  <main>
-    <h1>まーちゃんに手紙を書いてくれる？</h1>
+  <main class="is-top">
+    <section class="top-page" aria-label="トップページ">
+      <button class="start-button" type="button">はじめる</button>
+    </section>
+    <p class="question-number">1問目</p>
+    <h1>まーちゃんに手紙を書く♡</h1>
     <div class="choices" aria-label="回答を選んでください">
-      <button class="yes" type="button" data-message="ありがとう。まーちゃん、きっと喜ぶよ。">いいよ</button>
-      <button class="no" type="button" data-message="そっか。また気が向いたらお願いね。">むり</button>
+      <button class="yes" type="button">書く</button>
+      <button class="no" type="button">えー</button>
     </div>
     <p id="answer" role="status" aria-live="polite"></p>
+    <div class="final-message" role="status" aria-live="polite">
+      <div class="letter-scene" aria-hidden="true">
+        <div class="paper"></div>
+        <div class="envelope"></div>
+        <div class="heart"></div>
+      </div>
+      <strong>どんな内容でも喜ぶよ。</strong>
+      <span>さあ、書こう！</span>
+    </div>
   </main>
 
   <script>
+    const questions = [
+      {
+        label: "1問目",
+        text: "まーちゃんに手紙を書く♡",
+        yes: "書く",
+        no: "えー",
+        message: "いいね。次の質問にいくよ。"
+      },
+      {
+        label: "2問目",
+        text: "まーちゃんを笑顔にする手紙を書く♡",
+        yes: "書く",
+        no: "えー",
+        message: "どんな内容でも喜ぶよ。",
+        nextMessage: "さあ、書こう！"
+      }
+    ];
+
+    let currentQuestion = 0;
+    const questionNumber = document.querySelector(".question-number");
+    const main = document.querySelector("main");
+    const title = document.querySelector("main > h1");
     const answer = document.querySelector("#answer");
     const choices = document.querySelector(".choices");
+    const startButton = document.querySelector(".start-button");
     const yesButton = document.querySelector(".yes");
     const noButton = document.querySelector(".no");
 
+    function resetNoButton() {
+      noButton.removeAttribute("style");
+    }
+
+    function showQuestion(index) {
+      const question = questions[index];
+      questionNumber.textContent = question.label;
+      main.classList.remove("is-top", "is-final");
+      title.textContent = question.text;
+      yesButton.textContent = question.yes;
+      noButton.textContent = question.no;
+      answer.textContent = "";
+      resetNoButton();
+    }
+
     function overlapsYesButton(left, top, width, height) {
-      const area = choices.getBoundingClientRect();
       const yes = yesButton.getBoundingClientRect();
       const candidate = {
-        left: area.left + left,
-        top: area.top + top,
-        right: area.left + left + width,
-        bottom: area.top + top + height
+        left,
+        top,
+        right: left + width,
+        bottom: top + height
       };
 
       return !(
@@ -145,14 +372,23 @@
     }
 
     function moveNoButton(pointerX, pointerY) {
-      const area = choices.getBoundingClientRect();
       const button = noButton.getBoundingClientRect();
-      const maxLeft = Math.max(0, area.width - button.width);
-      const maxTop = Math.max(0, area.height - button.height);
-      const padding = 8;
+      const maxLeft = Math.max(0, window.innerWidth - button.width);
+      const maxTop = Math.max(0, window.innerHeight - button.height);
+      const padding = 12;
       let bestSpot = { left: 0, top: 0, distance: -1 };
 
-      for (let i = 0; i < 24; i += 1) {
+      if (getComputedStyle(noButton).position !== "fixed") {
+        const current = noButton.getBoundingClientRect();
+        noButton.style.position = "fixed";
+        noButton.style.width = `${current.width}px`;
+        noButton.style.left = `${current.left}px`;
+        noButton.style.top = `${current.top}px`;
+        noButton.style.right = "auto";
+        noButton.style.zIndex = "10";
+      }
+
+      for (let i = 0; i < 32; i += 1) {
         const left = padding + Math.random() * Math.max(0, maxLeft - padding * 2);
         const top = padding + Math.random() * Math.max(0, maxTop - padding * 2);
 
@@ -160,8 +396,8 @@
           continue;
         }
 
-        const centerX = area.left + left + button.width / 2;
-        const centerY = area.top + top + button.height / 2;
+        const centerX = left + button.width / 2;
+        const centerY = top + button.height / 2;
         const distance = Math.hypot(centerX - pointerX, centerY - pointerY);
 
         if (distance > bestSpot.distance) {
@@ -171,10 +407,13 @@
 
       noButton.style.left = `${Math.min(maxLeft, bestSpot.left)}px`;
       noButton.style.top = `${Math.min(maxTop, bestSpot.top)}px`;
-      noButton.style.right = "auto";
     }
 
     function pointerNearNoButton(event) {
+      if (main.classList.contains("is-top") || main.classList.contains("is-final")) {
+        return;
+      }
+
       const button = noButton.getBoundingClientRect();
       const pointerX = event.clientX;
       const pointerY = event.clientY;
@@ -188,6 +427,13 @@
     }
 
     document.addEventListener("pointermove", pointerNearNoButton);
+    window.addEventListener("resize", () => {
+      if (getComputedStyle(noButton).position === "fixed") {
+        const button = noButton.getBoundingClientRect();
+        noButton.style.left = `${Math.min(button.left, window.innerWidth - button.width - 12)}px`;
+        noButton.style.top = `${Math.min(button.top, window.innerHeight - button.height - 12)}px`;
+      }
+    });
     noButton.addEventListener("pointerenter", (event) => {
       moveNoButton(event.clientX, event.clientY);
     });
@@ -197,15 +443,29 @@
       moveNoButton(event.clientX, event.clientY);
     });
 
-    document.querySelectorAll("button").forEach((button) => {
-      button.addEventListener("click", () => {
-        if (button === noButton) {
-          return;
-        }
-
-        answer.textContent = button.dataset.message;
-      });
+    startButton.addEventListener("click", () => {
+      currentQuestion = 0;
+      showQuestion(currentQuestion);
     });
+
+    yesButton.addEventListener("click", () => {
+      const question = questions[currentQuestion];
+
+      if (currentQuestion < questions.length - 1) {
+        answer.textContent = question.message;
+        currentQuestion += 1;
+        setTimeout(() => showQuestion(currentQuestion), 650);
+      } else if (question.nextMessage) {
+        answer.textContent = "";
+        setTimeout(() => {
+          main.classList.add("is-final");
+          resetNoButton();
+        }, 300);
+      } else {
+        answer.textContent = question.message;
+      }
+    });
+
   </script>
 </body>
 </html>
